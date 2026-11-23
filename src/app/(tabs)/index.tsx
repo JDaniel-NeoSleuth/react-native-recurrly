@@ -1,10 +1,13 @@
 import "../../../global.css"
 import {Pressable, Text, View} from "react-native";
 import {Link} from "expo-router";
- 
+import {SafeAreaView as RNSafeAreaView} from "react-native-safe-area-context";
+import {styled} from "nativewind";
+const SafeAreaView = styled(RNSafeAreaView);
+
 export default function App() {
   return (
-    <View className="flex-1 items-center justify-center bg-background">
+    <SafeAreaView className="flex-1 bg-background p-5">
       <Text className="text-xl font-bold text-green-500">
         Welcome to NativeWind!
       </Text>
@@ -36,6 +39,10 @@ export default function App() {
             </Pressable>
         </Link>
 
+        {/* CORREÇÃO: href corrigido de "/src/app/subscriptions/spotify" para "/subscriptions/spotify".
+            No Expo Router, os caminhos de rota NÃO incluem o prefixo "/src/app/".
+            As rotas são relativas à pasta de rotas do Expo Router.
+            O caminho errado causava erro 404/500 ao tentar navegar. */}
         <Link href="/subscriptions/spotify" asChild>
             <Pressable className="mt-4 rounded-xl bg-blue-950 p-4">
                 <Text className="font-bold text-white">
@@ -59,6 +66,6 @@ export default function App() {
 
 
 
-    </View>
+    </SafeAreaView>
   );
 }
