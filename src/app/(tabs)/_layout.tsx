@@ -1,14 +1,13 @@
 import {Tabs} from "expo-router";
 import {tabs} from "../../../constants/data";
-import {colors, components} from '../../../constants/theme';
 import {View} from "react-native";
+import {colors, components} from '../../../constants/theme';
 import clsx from "clsx";
 import {Image} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 
 
 const tabBar = components.tabBar;
-
 
 // CORREÇÃO: clsx() com booleano direto não funciona como esperado.
 // Antes: clsx('tabs-pill', focused && 'tabs-active') — quando focused é false, passa "false" como classe.
@@ -18,13 +17,14 @@ const tabBar = components.tabBar;
 // CORREÇÃO: TabIcon props corrigidas de ({focused.icon}: TabIconProps) para ({focused, icon}: TabIconProps).
 // "focused.icon" não é desestruturação válida em TypeScript.
 // CORREÇÃO: JSX corrigido de focused{focused} para focused={focused} — sintaxe JSX inválida original.
+
 const TabLayout = () => {
     const insets = useSafeAreaInsets();
     const TabIcon = ({focused, icon}: TabIconProps) => {
         return (
             <View className="tabs-icon">
-                <View className={clsx('tabs-pill', { 'tabs-active': focused })}>
-                    <Image source={icon as any} resizeMode="contain" className="tabs-glyph"/>
+                <View className={clsx('tabs-pill', focused && 'tabs-active')}>
+                    <Image source={icon} resizeMode="contain" className="tabs-glyph"/>
                 </View>
             </View>
         );
