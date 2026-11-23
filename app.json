@@ -36,7 +36,14 @@
     ],
     "experiments": {
       "typedRoutes": true,
-      "reactCompiler": true
+      // CORREÇÃO: reactCompiler desabilitado (mudou de true para false).
+      // O React Compiler é incompatível com o Expo Go — ele requer um dev client compilado
+      // (EAS Build ou expo run:ios/android). Com Expo Go, o reactCompiler causa erro 500
+      // porque o código compilado não roda no ambiente genérico do Expo Go.
+      // Se quiser usar o React Compiler no futuro, precisa criar um dev client com:
+      //   npx expo run:ios  ou  npx expo run:android  (local)
+      //   eas build --profile development  (nuvem)
+      "reactCompiler": false
     }
   }
 }
